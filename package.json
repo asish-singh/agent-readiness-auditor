@@ -6,11 +6,15 @@
   "bin": {
     "agent-audit": "./dist/index.js"
   },
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "tsc",
     "audit": "tsx src/index.ts",
     "start": "node dist/index.js",
-    "test": "node --test"
+    "test": "node --import tsx --test test/*.test.ts",
+    "prepublishOnly": "npm run build"
   },
   "keywords": [
     "ai-agents",
@@ -21,6 +25,17 @@
   ],
   "author": "Asish Singh (@asish-singh)",
   "license": "MIT",
+  "homepage": "https://github.com/asish-singh/agent-readiness-auditor#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/asish-singh/agent-readiness-auditor.git"
+  },
+  "bugs": {
+    "url": "https://github.com/asish-singh/agent-readiness-auditor/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
   "engines": {
     "node": ">=18"
   },

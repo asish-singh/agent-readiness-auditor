@@ -39,7 +39,16 @@ $ npx agent-audit freeyoutubetranscribe.com
 
 Safety is weighted highest on purpose: a readable site that can hijack an agent is worse than an unreadable one.
 
-## Run it in your own terminal
+## Quick start (no install)
+
+Once published to npm, anyone can run it in one line — no clone, no install:
+
+```bash
+npx agent-readiness-auditor example.com
+npx agent-readiness-auditor example.com --json
+```
+
+## Run it from source
 
 **Requirements:** [Node.js](https://nodejs.org) 18 or newer (`node --version` to check) and `git`.
 

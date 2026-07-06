@@ -18,5 +18,7 @@ jobs:
       - run: npm ci
       - name: Build (typecheck + compile)
         run: npm run build
+      - name: Unit tests
+        run: npm test
       - name: Smoke test the compiled CLI
         run: node dist/index.js example.com
