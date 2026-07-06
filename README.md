@@ -78,6 +78,18 @@ npm link        # register the global command
 
 You can then run `agent-audit example.com` from any folder. To remove it later, run `npm unlink -g agent-readiness-auditor`.
 
+## Installing from GitHub Packages
+
+The package is also published to GitHub Packages as a scoped mirror, `@asish-singh/agent-readiness-auditor`. For most people the npm install above is simpler. Use GitHub Packages only if your organization standardizes on it, since it requires authentication even for public packages.
+
+To install from it, create a GitHub personal access token with the `read:packages` scope, then point the scope at the GitHub registry:
+
+```bash
+echo "@asish-singh:registry=https://npm.pkg.github.com" >> .npmrc
+echo "//npm.pkg.github.com/:_authToken=YOUR_GITHUB_TOKEN" >> .npmrc
+npm install @asish-singh/agent-readiness-auditor
+```
+
 ## Exit codes
 
 The tool sets its exit code so it can be used in automated pipelines:
