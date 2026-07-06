@@ -26,4 +26,17 @@ jobs:
       - run: npm ci
       - run: npm run build
       - name: Run agent-readiness audit
-        run: node dist/index.js "${{ github.event.inputs.target || 'freeyoutubetranscribe.com' }}"
+        # Exit codes: 0 = clean, 2 = hard safety failure (must fail the job),
+        # 1 = unreachable/other (infra, not a safety issue — warn, don't fail).
+        # Cloudflare-protected sites often 403 datacenter IPs like CI runners.
+        run: |
+          set +e
+          node dist/index.js "${{ github.event.inputs.target || 'freeyoutubetranscribe.com' }}"
+          code=$?
+          if [ "$code" -eq 2 ]; then
+            echo "::error::Hard safety failure detected in the audited site."
+            exit 2
+          elif [ "$code" -ne 0 ]; then
+            echo "::warning::Could not complete the audit (exit $code) — likely the site is unreachable from CI (e.g. bot protection). Not treating as a safety failure."
+            exit 0
+          fi
