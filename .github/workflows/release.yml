@@ -1,7 +1,11 @@
 name: Release
 
-# Publishes to npm and creates a GitHub Release when a version tag is pushed.
-# Requires an NPM_TOKEN secret (a granular npm token) in the repository.
+# On a version tag, this workflow:
+#   1. publishes the package to npm (the primary registry),
+#   2. creates a GitHub Release, and
+#   3. publishes a scoped mirror to GitHub Packages.
+# Requires an NPM_TOKEN secret (a granular npm token) for step 1.
+# GitHub Packages uses the built-in token, so no extra secret is needed.
 # Typical flow:
 #   npm version patch    # bumps package.json and creates the git tag
 #   git push --follow-tags
@@ -12,7 +16,7 @@ on:
       - "v*"
 
 jobs:
-  publish:
+  npm:
     runs-on: ubuntu-latest
     permissions:
       contents: write # allows creating the GitHub Release
@@ -35,3 +39,28 @@ jobs:
         run: gh release create "$GITHUB_REF_NAME" --title "$GITHUB_REF_NAME" --generate-notes
         env:
           GH_TOKEN: ${{ github.token }}
+
+  github-packages:
+    runs-on: ubuntu-latest
+    needs: npm
+    permissions:
+      contents: read
+      packages: write # allows publishing to GitHub Packages
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+          registry-url: "https://npm.pkg.github.com"
+          scope: "@asish-singh"
+      - run: npm ci
+      - run: npm run build
+      - name: Publish scoped mirror to GitHub Packages
+        # GitHub Packages requires the name to be scoped to the owner. Rename
+        # only for this publish; package.json on disk is not committed back.
+        run: |
+          npm pkg set name=@asish-singh/agent-readiness-auditor
+          npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
