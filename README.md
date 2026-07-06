@@ -1,5 +1,6 @@
 # Agent-Readiness Auditor
 
+[![npm version](https://img.shields.io/npm/v/agent-readiness-auditor.svg)](https://www.npmjs.com/package/agent-readiness-auditor)
 [![CI](https://github.com/asish-singh/agent-readiness-auditor/actions/workflows/ci.yml/badge.svg)](https://github.com/asish-singh/agent-readiness-auditor/actions/workflows/ci.yml)
 [![Audit live site](https://github.com/asish-singh/agent-readiness-auditor/actions/workflows/audit-site.yml/badge.svg)](https://github.com/asish-singh/agent-readiness-auditor/actions/workflows/audit-site.yml)
 
