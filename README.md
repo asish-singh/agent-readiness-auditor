@@ -1,5 +1,8 @@
 # Agent-Readiness Auditor
 
+[![CI](https://github.com/asish-singh/agent-readiness-auditor/actions/workflows/ci.yml/badge.svg)](https://github.com/asish-singh/agent-readiness-auditor/actions/workflows/ci.yml)
+[![Audit live site](https://github.com/asish-singh/agent-readiness-auditor/actions/workflows/audit-site.yml/badge.svg)](https://github.com/asish-singh/agent-readiness-auditor/actions/workflows/audit-site.yml)
+
 **Scan any website and score how ready — and how safe — it is for AI agents.**
 
 As agents start browsing, reading, and acting on the web, sites need to be legible to them *and* defended against them. This tool audits both in one pass and prints a graded report.
