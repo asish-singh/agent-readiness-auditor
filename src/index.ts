@@ -6,14 +6,14 @@ import type { AuditReport, Severity } from "./types.js";
 const ICON: Record<Severity, string> = { pass: "✅", warn: "⚠️ ", fail: "❌" };
 
 function render(report: AuditReport): void {
-  console.log(`\n  Agent-Readiness Audit — ${report.origin}\n`);
+  console.log(`\n  Agent readiness audit for ${report.origin}\n`);
   for (const f of report.findings) {
     console.log(`  ${ICON[f.severity]} ${f.title}  (${f.score}/${f.max})`);
     console.log(`      ${f.detail}`);
-    if (f.remediation) console.log(`      → ${f.remediation}`);
+    if (f.remediation) console.log(`      Fix: ${f.remediation}`);
   }
   const pct = Math.round((report.score / report.maxScore) * 100);
-  console.log(`\n  Score: ${report.score}/${report.maxScore} (${pct}%) — Grade ${report.grade}\n`);
+  console.log(`\n  Score: ${report.score}/${report.maxScore} (${pct}%)   Grade ${report.grade}\n`);
 }
 
 async function main(): Promise<void> {
@@ -34,7 +34,7 @@ async function main(): Promise<void> {
     } else {
       render(report);
     }
-    // Exit non-zero if any hard failure — useful in CI.
+    // Exit non-zero if any hard failure, which is useful in CI.
     process.exit(report.findings.some((f) => f.severity === "fail") ? 2 : 0);
   } catch (err) {
     console.error(`Error: ${(err as Error).message}`);

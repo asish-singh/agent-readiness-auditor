@@ -1,104 +1,99 @@
-# Agent-Readiness Auditor
+# Agent Readiness Auditor
 
 [![npm version](https://img.shields.io/npm/v/agent-readiness-auditor.svg)](https://www.npmjs.com/package/agent-readiness-auditor)
 [![CI](https://github.com/asish-singh/agent-readiness-auditor/actions/workflows/ci.yml/badge.svg)](https://github.com/asish-singh/agent-readiness-auditor/actions/workflows/ci.yml)
-[![Audit live site](https://github.com/asish-singh/agent-readiness-auditor/actions/workflows/audit-site.yml/badge.svg)](https://github.com/asish-singh/agent-readiness-auditor/actions/workflows/audit-site.yml)
 
-**Scan any website and score how ready — and how safe — it is for AI agents.**
+A command-line tool that scans a website and scores how well it works with, and how well it defends against, automated AI agents.
 
-As agents start browsing, reading, and acting on the web, sites need to be legible to them *and* defended against them. This tool audits both in one pass and prints a graded report.
+## What problem this solves
 
-## Executive summary
+AI assistants increasingly visit websites on a person's behalf: reading pages, following instructions found on them, and taking actions. This creates two practical issues for site owners:
 
-**The problem.** SEO tools ask "is this site good for Google?" Nobody was asking the new question: *"is this site ready for — and safe from — AI agents that read and act on it?"* Agents now visit pages, follow their instructions, and take actions on a user's behalf. That opens a fresh attack surface (hidden text that hijacks the agent) and a fresh legibility gap (agents guessing at content humans designed for eyeballs).
+1. **Safety.** A page can contain text that is hidden from human visitors but still read by an AI agent. That hidden text can carry instructions designed to hijack the agent. This is known as indirect prompt injection.
+2. **Readability for machines.** Sites are usually built for human eyes. Agents do better when a site also publishes machine-readable signals about its content and its rules.
 
-**What this does.** `agent-audit` fetches any URL and scores it 0–100 across five checks — weighted so **safety dominates**. The headline check hunts for *indirect prompt injection*: text hidden from humans (`display:none`, `opacity:0`, `aria-hidden`) but still read by an AI, containing hijack phrases like "ignore previous instructions." The other four measure agent legibility (`llms.txt`, AI-crawler rules in `robots.txt`, JSON-LD structured data, and an accountability surface).
-
-**Why it matters.** It returns a non-zero exit code on a hard safety failure, so it drops straight into CI to *block a deploy* that would ship an agent-hijacking page. It's the executable version of the governance ideas in my [Agentic Web Governance Pack](https://github.com/asish-singh/agentic-web-governance-pack) — theory turned into an enforceable check.
-
-```
-$ npx agent-audit freeyoutubetranscribe.com
-
-  ✅ No hidden prompt-injection payloads  (40/40)
-  ✅ llms.txt present                     (15/15)
-  ✅ robots.txt addresses AI crawlers     (15/15)
-  ✅ Machine-readable structured data     (15/15)
-  ✅ Accountability surface present       (15/15)
-
-  Score: 100/100 (100%) — Grade A
-```
+Standard SEO tools measure how well a site works for search engines. This tool measures something different: how well a site works for AI agents, and whether it is safe for them to read.
 
 ## What it checks
 
-| Check | Points | Why it matters |
+The tool fetches a URL and runs five checks, producing a score from 0 to 100 and a letter grade from A to F. Safety is weighted highest on purpose, because a readable site that can hijack an agent is worse than one that is simply hard to read.
+
+| Check | Points | What it looks for |
 |---|---|---|
-| **Hidden prompt-injection payloads** | 40 | The #1 agentic-web safety risk — hidden text that hijacks an agent reading the page. |
-| **`llms.txt` present** | 15 | Gives agents a curated map of the site ([llmstxt.org](https://llmstxt.org)). |
-| **`robots.txt` AI stance** | 15 | Explicit allow/disallow rules for AI crawlers (GPTBot, ClaudeBot, …). |
-| **Structured data (JSON-LD)** | 15 | Lets agents parse entities instead of scraping prose. |
-| **Accountability surface** | 15 | Reachable contact/privacy/terms — the transparency baseline. |
+| Hidden prompt-injection text | 40 | Text hidden from humans (for example `display:none` or `opacity:0`) that contains agent-hijacking phrases such as "ignore previous instructions". |
+| `llms.txt` file | 15 | A published file that gives agents a curated map of the site. See [llmstxt.org](https://llmstxt.org). |
+| `robots.txt` stance on AI crawlers | 15 | Explicit allow or disallow rules for AI crawlers such as GPTBot and ClaudeBot. |
+| Structured data (JSON-LD) | 15 | Machine-readable data that lets agents understand page content directly. |
+| Accountability links | 15 | Reachable contact, privacy, terms, or about links. |
 
-Safety is weighted highest on purpose: a readable site that can hijack an agent is worse than an unreadable one.
+## Example output
 
-## Quick start (no install)
+```
+$ npx agent-readiness-auditor example.com
 
-Once published to npm, anyone can run it in one line — no clone, no install:
+  Agent readiness audit for https://example.com
+
+  ✅ No hidden prompt-injection payloads  (40/40)
+  ⚠️  llms.txt present                     (0/15)
+  ⚠️  robots.txt addresses AI crawlers     (0/15)
+  ⚠️  Machine-readable structured data     (0/15)
+  ⚠️  Accountability surface present       (0/15)
+
+  Score: 40/100 (40%)   Grade D
+```
+
+Each line shows the check result, its score, and (when a check does not fully pass) a suggested fix.
+
+## Quick start
+
+If you have [Node.js](https://nodejs.org) 18 or newer installed, you can run the tool in one line without installing anything:
 
 ```bash
 npx agent-readiness-auditor example.com
 npx agent-readiness-auditor example.com --json
 ```
 
-## Run it from source
+Use a bare domain (`example.com`) or a full URL (`https://example.com`). The `--json` flag prints machine-readable output for use in scripts.
 
-**Requirements:** [Node.js](https://nodejs.org) 18 or newer (`node --version` to check) and `git`.
+## Running from source
 
-**1. Clone and install**
+To work on the code or run it from a local copy:
 
 ```bash
 git clone https://github.com/asish-singh/agent-readiness-auditor.git
 cd agent-readiness-auditor
 npm install
-```
-
-**2. Audit any site**
-
-```bash
 npm run audit -- example.com          # human-readable report
-npm run audit -- example.com --json   # machine-readable JSON (for CI / tooling)
+npm run audit -- example.com --json   # JSON output
 ```
 
-> The `--` matters: it passes the URL to the tool instead of to npm. You can pass a bare domain (`example.com`) or a full URL (`https://example.com`).
+The `--` in the command passes the URL to the tool rather than to npm.
 
-**3. (Optional) Install it as a global `agent-audit` command**
-
-So you can run it from any folder, without `cd`-ing into the project:
+To install a global `agent-audit` command from your local copy:
 
 ```bash
-npm run build     # compile TypeScript → dist/
-npm link          # register the global command
+npm run build   # compile TypeScript into dist/
+npm link        # register the global command
 ```
 
-Then, from anywhere:
+You can then run `agent-audit example.com` from any folder. To remove it later, run `npm unlink -g agent-readiness-auditor`.
 
-```bash
-agent-audit stripe.com
-agent-audit stripe.com --json
-```
+## Exit codes
 
-(To remove it later: `npm unlink -g agent-readiness-auditor`.)
+The tool sets its exit code so it can be used in automated pipelines:
 
-### Reading the results
+- `0`: the audit ran and found no hard safety failure.
+- `2`: a hard safety failure was found (for example, hidden prompt-injection text). Use this to fail a build.
+- `1`: the tool could not complete the audit (for example, the site was unreachable).
 
-Each check prints `✅ pass`, `⚠️ warn`, or `❌ fail` with its score; a `→` line gives the fix when something falls short. The footer shows total score, percent, and an A–F grade.
+## How the code is organized
 
-**Exit codes:** `0` clean · `2` a hard safety failure was found · `1` error. The non-zero-on-fail behavior makes it drop-in for CI pipelines — fail the build if a page would hijack an agent.
+Each check lives in its own file under `src/checks/` and returns a structured result. All checks are registered in a single list in `src/audit.ts`, and the total score is derived from that list, so adding a new check does not require changing the scoring logic. Architecture decisions are recorded in [`docs/adr/`](docs/adr/), and planned work is in [`ROADMAP.md`](ROADMAP.md).
 
-## Design
+## Background
 
-This project turns the ideas in my [Agentic Web Governance Pack](https://github.com/asish-singh/agentic-web-governance-pack)
-into an executable check. Architecture decisions are recorded in [`docs/adr/`](docs/adr/); the plan lives in [`ROADMAP.md`](ROADMAP.md).
+This tool grew out of the [Agentic Web Governance Pack](https://github.com/asish-singh/agentic-web-governance-pack), a set of guidelines for how websites should behave toward AI agents. This project turns several of those guidelines into checks that can be run and measured.
 
 ## License
 
-MIT © Asish Singh
+MIT. See [LICENSE](LICENSE).

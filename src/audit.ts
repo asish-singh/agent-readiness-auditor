@@ -5,7 +5,7 @@ import { promptInjectionCheck } from "./checks/prompt-injection.js";
 import { structuredDataCheck } from "./checks/structured-data.js";
 import { transparencyCheck } from "./checks/transparency.js";
 
-/** Registry of all checks. Add new checks here — scoring auto-adjusts. */
+/** Registry of all checks. Add new checks here; the score total adjusts automatically. */
 export const CHECKS: Check[] = [
   promptInjectionCheck,
   llmsTxtCheck,

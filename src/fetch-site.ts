@@ -42,7 +42,7 @@ export async function fetchSite(input: string): Promise<SiteContext> {
         ? "the request failed (network error, DNS, or timeout)"
         : `the server returned HTTP ${page.status}` +
           (page.status === 403 || page.status === 401
-            ? " — the site likely blocks automated clients (e.g. Cloudflare bot protection)"
+            ? " (the site likely blocks automated clients, for example Cloudflare bot protection)"
             : "");
     throw new Error(`Could not fetch ${origin}: ${reason}.`);
   }

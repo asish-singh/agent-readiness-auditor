@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 import { audit, CHECKS } from "../src/audit.js";
 import type { SiteContext } from "../src/types.js";
 
-/** A site context that passes every check — used as a baseline to mutate. */
+/** A site context that passes every check, used as a baseline to mutate. */
 function perfectCtx(): SiteContext {
   return {
     origin: "https://example.com",

@@ -5,15 +5,13 @@
 
 ## Context
 
-Small projects accumulate decisions ("why a CLI?", "why fetch-only?") that get
-lost. Reviewers and future-me need the *why*, not just the *what* in the diff.
+Even small projects build up decisions, such as why the tool is a command-line program or why it reads raw HTML. These reasons are easy to lose. Reviewers and future maintainers need to know why a choice was made, not just what changed in the code.
 
 ## Decision
 
-Keep short Architecture Decision Records (ADRs) in `docs/adr/`, numbered and
-append-only. One file per significant, hard-to-reverse decision.
+Keep short architecture decision records (ADRs) in `docs/adr/`. Number them in order and add to them rather than rewriting them. Write one file per significant, hard-to-reverse decision.
 
 ## Consequences
 
-- Decisions are traceable and citable in issues/PRs.
-- Superseded ADRs stay in history rather than being edited away.
+- Decisions can be traced and referenced from issues and pull requests.
+- When a decision is replaced, the old record stays in history rather than being deleted.

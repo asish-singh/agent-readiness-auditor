@@ -29,8 +29,8 @@ function isHidden(style: string | undefined, el: cheerio.Cheerio<any>): boolean 
 }
 
 /**
- * Scans hidden DOM content for indirect prompt-injection payloads — the core
- * "agentic web" safety risk. Visible marketing copy is intentionally ignored.
+ * Scans hidden DOM content for indirect prompt-injection payloads, the core
+ * agentic-web safety risk. Visible marketing copy is intentionally ignored.
  */
 export const promptInjectionCheck: Check = {
   id: "prompt-injection-hidden",

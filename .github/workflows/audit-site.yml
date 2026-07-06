@@ -1,7 +1,7 @@
 name: Audit live site
 
 # Audits a target site on a schedule and on demand. Fails (exit 2) if a hard
-# safety check — e.g. hidden prompt-injection — is detected on the live page.
+# safety check (for example, hidden prompt injection) is detected on the live page.
 
 on:
   workflow_dispatch:
@@ -27,7 +27,7 @@ jobs:
       - run: npm run build
       - name: Run agent-readiness audit
         # Exit codes: 0 = clean, 2 = hard safety failure (must fail the job),
-        # 1 = unreachable/other (infra, not a safety issue — warn, don't fail).
+        # 1 = unreachable or other (infrastructure, not a safety issue: warn, do not fail).
         # Cloudflare-protected sites often 403 datacenter IPs like CI runners.
         run: |
           set +e
@@ -37,6 +37,6 @@ jobs:
             echo "::error::Hard safety failure detected in the audited site."
             exit 2
           elif [ "$code" -ne 0 ]; then
-            echo "::warning::Could not complete the audit (exit $code) — likely the site is unreachable from CI (e.g. bot protection). Not treating as a safety failure."
+            echo "::warning::Could not complete the audit (exit $code). The site is likely unreachable from CI, for example due to bot protection. Not treating this as a safety failure."
             exit 0
           fi

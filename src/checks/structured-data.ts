@@ -18,7 +18,7 @@ export const structuredDataCheck: Check = {
         ...base,
         severity: "pass",
         score: 15,
-        detail: `Found ${jsonLd} JSON-LD block(s) — agents can parse page entities.`,
+        detail: `Found ${jsonLd} JSON-LD block(s), so agents can parse page entities.`,
       };
     }
     return {

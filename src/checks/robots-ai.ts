@@ -13,7 +13,7 @@ const AI_AGENTS = [
 
 /**
  * Checks whether robots.txt takes an explicit position on AI crawlers.
- * Having a stance (allow OR disallow) is the signal — silence is the problem.
+ * Having a stance (allow OR disallow) is the signal. Silence is the problem.
  */
 export const robotsAiCheck: Check = {
   id: "robots-ai-stance",

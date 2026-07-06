@@ -1,7 +1,7 @@
 import type { Check, Finding, SiteContext } from "../types.js";
 
 /**
- * Checks for an llms.txt file — the emerging convention for giving AI agents
+ * Checks for an llms.txt file, the emerging convention for giving AI agents
  * a curated, machine-friendly map of a site. See https://llmstxt.org.
  */
 export const llmsTxtCheck: Check = {
@@ -14,7 +14,7 @@ export const llmsTxtCheck: Check = {
         ...base,
         severity: "pass",
         score: 15,
-        detail: "Found /llms.txt — agents get a curated map of the site.",
+        detail: "Found /llms.txt, so agents get a curated map of the site.",
       };
     }
     return {
