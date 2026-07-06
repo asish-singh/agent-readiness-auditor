@@ -19,7 +19,7 @@ function render(report: AuditReport): void {
 async function main(): Promise<void> {
   const args = process.argv.slice(2);
   const jsonMode = args.includes("--json");
-  const target = args.find((a) => !a.startsWith("--"));
+  const target = args.find((a: string) => !a.startsWith("--"));
 
   if (!target) {
     console.error("Usage: agent-audit <url> [--json]");
