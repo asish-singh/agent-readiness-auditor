@@ -1,9 +1,9 @@
 name: Release
 
-# Publishes to npm when you push a version tag (e.g. v0.1.1).
-# Requires an NPM_TOKEN secret (Automation token from npmjs.com) in the repo.
+# Publishes to npm and creates a GitHub Release when a version tag is pushed.
+# Requires an NPM_TOKEN secret (a granular npm token) in the repository.
 # Typical flow:
-#   npm version patch   # bumps package.json + creates the git tag
+#   npm version patch    # bumps package.json and creates the git tag
 #   git push --follow-tags
 
 on:
@@ -15,7 +15,7 @@ jobs:
   publish:
     runs-on: ubuntu-latest
     permissions:
-      contents: read
+      contents: write # allows creating the GitHub Release
       id-token: write # enables npm provenance
     steps:
       - uses: actions/checkout@v4
@@ -31,3 +31,7 @@ jobs:
         run: npm publish --provenance --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: Create GitHub Release
+        run: gh release create "$GITHUB_REF_NAME" --title "$GITHUB_REF_NAME" --generate-notes
+        env:
+          GH_TOKEN: ${{ github.token }}
