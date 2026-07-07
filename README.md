@@ -42,12 +42,15 @@ $ npx agent-readiness-auditor example.com
   Agent readiness audit for https://example.com
 
   ✅ No hidden prompt-injection payloads  (40/40)
-  ⚠️  llms.txt present                     (0/15)
-  ⚠️  robots.txt addresses AI crawlers     (0/15)
-  ⚠️  Machine-readable structured data     (0/15)
-  ⚠️  Accountability surface present       (0/15)
+  ⚠️  llms.txt present                     (0/12)
+  ⚠️  robots.txt addresses AI crawlers     (0/12)
+  ⚠️  Machine-readable structured data     (0/12)
+  ⚠️  Accountability surface present       (0/9)
+  ⚠️  Sitemap present                      (0/5)
+  ⚠️  Content structured for AI answers    (0/5)
+  ✅ No accidental index blocking          (5/5)
 
-  Score: 40/100 (40%)   Grade D
+  Score: 45/100 (45%)   Grade D
 ```
 
 Each line shows the check result, its score, and (when a check does not fully pass) a suggested fix.
@@ -84,7 +87,7 @@ steps:
   - uses: actions/setup-node@v4
     with:
       node-version: 20
-  - uses: asish-singh/agent-readiness-auditor@v0.3.0
+  - uses: asish-singh/agent-readiness-auditor@v0.4.1
     with:
       url: example.com
       fail-on: safety   # or "never" to report without failing
