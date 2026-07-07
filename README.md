@@ -16,7 +16,7 @@ Standard SEO tools measure how well a site works for search engines. This tool m
 
 ## Research built with this tool
 
-[The State of the Agentic Web, 2026](reports/2026-state-of-the-agentic-web/) audits 84 prominent sites across seven categories with this tool. Among the findings, no audited site carried hidden prompt injection content, 36% publish llms.txt, and nearly one in five prominent sites refuses automated visitors entirely, including several AI companies. The data and method are published for anyone to reproduce.
+[The State of the Agentic Web, 2026](reports/2026-state-of-the-agentic-web/) audits 84 prominent sites across seven categories with this tool, and its [second edition](reports/2026-state-of-the-agentic-web/second-edition.md) reruns the study with the deeper nine check audit. Among the findings, no audited site carries hidden prompt injection content even under attribute level and multi page scanning, only 13% publish the FAQ structured data AI answers quote, no site advertises an MCP endpoint, and nearly one in five prominent sites refuses automated visitors entirely, including several AI companies. The data and method are published for anyone to reproduce.
 
 ## What it checks
 

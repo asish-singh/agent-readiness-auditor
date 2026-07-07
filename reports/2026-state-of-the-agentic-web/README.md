@@ -1,6 +1,6 @@
 # The State of the Agentic Web, 2026
 
-*A study of how 84 prominent websites treat AI agents, run on July 7, 2026 with [agent-readiness-auditor](https://github.com/asish-singh/agent-readiness-auditor) v0.2.0. The raw data is in [results.csv](results.csv) and the site list in [sites.txt](sites.txt). Anyone can reproduce the study with one command, documented below.*
+*A study of how 84 prominent websites treat AI agents, run on July 7, 2026 with [agent-readiness-auditor](https://github.com/asish-singh/agent-readiness-auditor) v0.2.0. A [second edition](second-edition.md) with a deeper nine check instrument ran later the same day. The raw data is in [results.csv](results.csv) and the site list in [sites.txt](sites.txt). Anyone can reproduce the study with one command, documented below.*
 
 ## Summary
 
