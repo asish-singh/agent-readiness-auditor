@@ -1,6 +1,6 @@
 {
   "name": "agent-readiness-auditor",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "description": "Scan a website and score how well it works with, and defends against, AI agents.",
   "type": "module",
   "bin": {
