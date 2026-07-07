@@ -3,6 +3,10 @@
 All notable changes to this project are documented here.
 The format follows [Keep a Changelog](https://keepachangelog.com), and this project uses [semantic versioning](https://semver.org).
 
+## [0.4.1] - 2026-07-07
+### Fixed
+- Detection precision. Weak phrases that occur in ordinary writing about AI ("as an AI", "system prompt") now only count inside deliberately hidden elements. Attribute and comment scanning requires unambiguous directive phrases, so news captions and documentation are no longer flagged as attacks.
+
 ## [0.4.0] - 2026-07-07
 ### Added
 - Multi page crawling. The audit now also fetches the sitemap and up to four key pages, and the safety check scans all of them.

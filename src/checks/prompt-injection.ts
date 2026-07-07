@@ -5,19 +5,25 @@ import type { Check, Finding, SiteContext } from "../types.js";
  * Phrases that, when found in hidden page content, are classic attempts to
  * hijack an AI agent reading the page (indirect prompt injection).
  */
-const INJECTION_PHRASES = [
+const STRONG_PHRASES = [
   "ignore previous instructions",
   "ignore all previous",
   "ignore prior instructions",
   "disregard the above",
   "disregard previous",
-  "new instructions:",
-  "you are now",
-  "system prompt",
-  "as an ai",
   "reveal your instructions",
   "do not tell the user",
 ];
+
+/**
+ * Weaker signals that appear in ordinary writing about AI ("as an AI", a news
+ * caption mentioning a system prompt). These only count inside deliberately
+ * hidden elements, never in attributes or comments, to avoid flagging
+ * journalism and documentation as attacks.
+ */
+const WEAK_PHRASES = ["new instructions:", "you are now", "system prompt", "as an ai"];
+
+const HIDDEN_CONTENT_PHRASES = [...STRONG_PHRASES, ...WEAK_PHRASES];
 
 /**
  * Normalizes text before phrase matching so unicode tricks can't slip
@@ -57,7 +63,7 @@ function scanHtml(html: string, hits: Set<string>): void {
     const el = $(node);
     if (!isHidden(el.attr("style"), el)) return;
     const text = normalize(el.text());
-    for (const phrase of INJECTION_PHRASES) {
+    for (const phrase of HIDDEN_CONTENT_PHRASES) {
       if (text.includes(phrase)) hits.add(phrase);
     }
   });
@@ -69,7 +75,7 @@ function scanHtml(html: string, hits: Set<string>): void {
       const value = el.attr(attr);
       if (!value) continue;
       const text = normalize(value);
-      for (const phrase of INJECTION_PHRASES) {
+      for (const phrase of STRONG_PHRASES) {
         if (text.includes(phrase)) hits.add(`${phrase} (in ${attr} attribute)`);
       }
     }
@@ -79,7 +85,7 @@ function scanHtml(html: string, hits: Set<string>): void {
   const comments = html.match(/<!--([\s\S]*?)-->/g) ?? [];
   for (const c of comments) {
     const text = normalize(c);
-    for (const phrase of INJECTION_PHRASES) {
+    for (const phrase of STRONG_PHRASES) {
       if (text.includes(phrase)) hits.add(`${phrase} (in HTML comment)`);
     }
   }
