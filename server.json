@@ -1,0 +1,21 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-07-09/server.schema.json",
+  "name": "io.github.asish-singh/agent-readiness-auditor",
+  "description": "Audit a website for AI agent readiness and safety. Scores hidden prompt injection risk, llms.txt, robots.txt AI stance, structured data, and accountability.",
+  "repository": {
+    "url": "https://github.com/asish-singh/agent-readiness-auditor",
+    "source": "github"
+  },
+  "version": "0.3.1",
+  "packages": [
+    {
+      "registry_type": "npm",
+      "identifier": "agent-readiness-auditor",
+      "version": "0.3.1",
+      "transport": {
+        "type": "stdio"
+      },
+      "runtime_hint": "npx"
+    }
+  ]
+}
