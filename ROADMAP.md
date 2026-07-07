@@ -18,7 +18,7 @@ Work is planned in milestones. Each milestone can ship on its own.
 
 ## v0.3: Wider distribution
 - [ ] A GitHub Action wrapper so other repos can run the audit in their own pipelines
-- [ ] Batch mode: audit a list of URLs and output CSV
+- [x] Batch mode, audit a list of URLs and output CSV (shipped early, in v0.2.0)
 
 ## v0.4: Web interface
 - [ ] A single-page web front end
@@ -28,7 +28,7 @@ Work is planned in milestones. Each milestone can ship on its own.
 
 MCP is the emerging standard that lets AI assistants connect to external tools. Two separate opportunities, tracked as issues:
 
-- [ ] Expose the auditor as an MCP server, so an AI assistant can run an audit on request ("audit example.com for me")
+- [x] Expose the auditor as an MCP server, so an AI assistant can run an audit on request (shipped early, in v0.2.0)
 - [ ] Add a scoring signal for whether a site advertises its own MCP or agent-facing endpoints
 
 ## Out of scope for now

@@ -3,6 +3,11 @@
 All notable changes to this project are documented here.
 The format follows [Keep a Changelog](https://keepachangelog.com), and this project uses [semantic versioning](https://semver.org).
 
+## [0.2.0] - 2026-07-07
+### Added
+- An MCP server (`agent-audit-mcp`), so AI assistants can run audits through the Model Context Protocol. It exposes one tool, `audit_site`.
+- Batch mode. `agent-audit --batch sites.txt` audits a list of URLs with limited concurrency and can output per site reports, JSON, or CSV with one column per check.
+
 ## [0.1.1] - 2026-07-07
 ### Added
 - Unit tests covering scoring, grade boundaries, hidden prompt-injection detection, and URL handling.

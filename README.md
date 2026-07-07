@@ -55,6 +55,41 @@ npx agent-readiness-auditor example.com --json
 
 Use a bare domain (`example.com`) or a full URL (`https://example.com`). The `--json` flag prints machine-readable output for use in scripts.
 
+## Auditing many sites at once
+
+Batch mode reads a text file with one URL per line (lines starting with `#` are ignored) and audits them a few at a time.
+
+```bash
+agent-audit --batch sites.txt          # a report per site
+agent-audit --batch sites.txt --csv    # one CSV row per site
+agent-audit --batch sites.txt --json   # structured results
+```
+
+The CSV has a column for each check, which makes it easy to open in a spreadsheet or feed into an analysis.
+
+## Using it from an AI assistant (MCP)
+
+The auditor ships with a server for the Model Context Protocol, the standard that lets AI assistants use external tools. Once connected, you can simply ask your assistant to audit a site for you.
+
+For Claude Code, one command connects it.
+
+```bash
+claude mcp add agent-readiness-auditor -- npx -y --package=agent-readiness-auditor agent-audit-mcp
+```
+
+For Claude Desktop, add this to the `mcpServers` section of the configuration file.
+
+```json
+{
+  "agent-readiness-auditor": {
+    "command": "npx",
+    "args": ["-y", "--package=agent-readiness-auditor", "agent-audit-mcp"]
+  }
+}
+```
+
+The server exposes one tool, `audit_site`, which takes a URL and returns the same scores and findings as the command line.
+
 ## Running from source
 
 To work on the code or run it from a local copy:

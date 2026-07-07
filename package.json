@@ -1,10 +1,11 @@
 {
   "name": "agent-readiness-auditor",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "description": "Scan a website and score how well it works with, and defends against, AI agents.",
   "type": "module",
   "bin": {
-    "agent-audit": "./dist/index.js"
+    "agent-audit": "./dist/index.js",
+    "agent-audit-mcp": "./dist/mcp.js"
   },
   "files": [
     "dist"
@@ -21,7 +22,9 @@
     "llms-txt",
     "prompt-injection",
     "agentic-web",
-    "governance"
+    "governance",
+    "mcp",
+    "model-context-protocol"
   ],
   "author": "Asish Singh (@asish-singh)",
   "license": "MIT",
@@ -40,7 +43,9 @@
     "node": ">=18"
   },
   "dependencies": {
-    "cheerio": "^1.0.0"
+    "@modelcontextprotocol/sdk": "^1.29.0",
+    "cheerio": "^1.0.0",
+    "zod": "^4.4.3"
   },
   "devDependencies": {
     "@types/node": "^26.1.0",
