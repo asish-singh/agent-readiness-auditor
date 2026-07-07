@@ -28,13 +28,49 @@ async function getText(url: string): Promise<FetchResult> {
   }
 }
 
-/** Fetches the landing page plus robots.txt and llms.txt for a target site. */
+/** How many pages beyond the landing page the crawl visits. */
+const EXTRA_PAGES = 4;
+
+/** Picks up to `limit` same-origin page URLs from the sitemap, else from landing-page links. */
+function pickPageUrls(origin: string, sitemapXml: string | null, html: string, limit: number): string[] {
+  const urls: string[] = [];
+  const seen = new Set<string>([origin, `${origin}/`]);
+  const add = (raw: string) => {
+    try {
+      const u = new URL(raw, origin);
+      const clean = `${u.origin}${u.pathname}`;
+      if (u.origin !== origin || seen.has(clean)) return;
+      if (/\.(png|jpe?g|gif|svg|css|js|pdf|xml|ico|webp|mp4|zip)$/i.test(u.pathname)) return;
+      seen.add(clean);
+      urls.push(clean);
+    } catch {}
+  };
+  if (sitemapXml) {
+    for (const m of sitemapXml.matchAll(/<loc>\s*([^<\s]+)\s*<\/loc>/gi)) {
+      if (urls.length >= limit) break;
+      add(m[1]);
+    }
+  }
+  if (urls.length < limit) {
+    for (const m of html.matchAll(/<a\s[^>]*href=["']([^"'#]+)["']/gi)) {
+      if (urls.length >= limit) break;
+      add(m[1]);
+    }
+  }
+  return urls;
+}
+
+/**
+ * Fetches the landing page, robots.txt, llms.txt, sitemap.xml, and a few
+ * additional pages (from the sitemap when available, else landing-page links).
+ */
 export async function fetchSite(input: string): Promise<SiteContext> {
   const origin = normalizeOrigin(input);
-  const [page, robots, llms] = await Promise.all([
+  const [page, robots, llms, sitemap] = await Promise.all([
     getText(origin),
     getText(`${origin}/robots.txt`),
     getText(`${origin}/llms.txt`),
+    getText(`${origin}/sitemap.xml`),
   ]);
   if (page.text === null) {
     const reason =
@@ -46,5 +82,17 @@ export async function fetchSite(input: string): Promise<SiteContext> {
             : "");
     throw new Error(`Could not fetch ${origin}: ${reason}.`);
   }
-  return { origin, html: page.text, robotsTxt: robots.text, llmsTxt: llms.text };
+  const pageUrls = pickPageUrls(origin, sitemap.text, page.text, EXTRA_PAGES);
+  const fetched = await Promise.all(pageUrls.map((u) => getText(u)));
+  const pages = pageUrls
+    .map((url, i) => ({ url, html: fetched[i].text }))
+    .filter((p): p is { url: string; html: string } => p.html !== null);
+  return {
+    origin,
+    html: page.text,
+    robotsTxt: robots.text,
+    llmsTxt: llms.text,
+    sitemapXml: sitemap.text,
+    pages,
+  };
 }

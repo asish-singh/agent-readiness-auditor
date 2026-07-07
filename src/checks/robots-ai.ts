@@ -19,7 +19,7 @@ export const robotsAiCheck: Check = {
   id: "robots-ai-stance",
   title: "robots.txt addresses AI crawlers",
   run(ctx: SiteContext): Finding {
-    const base = { id: this.id, title: this.title, max: 15 } as const;
+    const base = { id: this.id, title: this.title, max: 12 } as const;
     if (!ctx.robotsTxt) {
       return {
         ...base,
@@ -37,7 +37,7 @@ export const robotsAiCheck: Check = {
       return {
         ...base,
         severity: "pass",
-        score: 15,
+        score: 12,
         detail: `robots.txt explicitly names AI agents: ${mentioned.join(", ")}.`,
       };
     }

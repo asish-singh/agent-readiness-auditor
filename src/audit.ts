@@ -4,6 +4,10 @@ import { robotsAiCheck } from "./checks/robots-ai.js";
 import { promptInjectionCheck } from "./checks/prompt-injection.js";
 import { structuredDataCheck } from "./checks/structured-data.js";
 import { transparencyCheck } from "./checks/transparency.js";
+import { sitemapCheck } from "./checks/sitemap.js";
+import { answerabilityCheck } from "./checks/answerability.js";
+import { metaRobotsCheck } from "./checks/meta-robots.js";
+import { mcpSignalCheck } from "./checks/mcp-signal.js";
 
 /** Registry of all checks. Add new checks here; the score total adjusts automatically. */
 export const CHECKS: Check[] = [
@@ -12,6 +16,10 @@ export const CHECKS: Check[] = [
   robotsAiCheck,
   structuredDataCheck,
   transparencyCheck,
+  sitemapCheck,
+  answerabilityCheck,
+  metaRobotsCheck,
+  mcpSignalCheck,
 ];
 
 function gradeFor(pct: number): string {

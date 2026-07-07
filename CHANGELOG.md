@@ -3,6 +3,15 @@
 All notable changes to this project are documented here.
 The format follows [Keep a Changelog](https://keepachangelog.com), and this project uses [semantic versioning](https://semver.org).
 
+## [0.4.0] - 2026-07-07
+### Added
+- Multi page crawling. The audit now also fetches the sitemap and up to four key pages, and the safety check scans all of them.
+- Deeper prompt injection detection: off screen CSS positioning, zero width unicode obfuscation, `alt`/`title`/`aria-label` attribute payloads, and HTML comments.
+- Four new checks: sitemap presence (5 points), answerability via FAQ/QA/HowTo structured data (5), accidental `noindex`/`noai` blocking (5), and an unscored informational MCP endpoint signal.
+
+### Changed
+- Weights rebalanced so the total stays 100: llms.txt, robots.txt stance, and structured data are now 12 points each, accountability links 9. Safety remains 40.
+
 ## [0.3.0] - 2026-07-07
 ### Added
 - A composite GitHub Action, so any repository can audit a site in its own pipeline with `uses: asish-singh/agent-readiness-auditor@v0.3.0`. It fails the build on a hard safety failure, warns on unreachable sites, and has a `fail-on: never` reporting mode.

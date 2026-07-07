@@ -12,7 +12,7 @@ export const transparencyCheck: Check = {
   id: "transparency-contact",
   title: "Accountability surface present",
   run(ctx: SiteContext): Finding {
-    const base = { id: this.id, title: this.title, max: 15 } as const;
+    const base = { id: this.id, title: this.title, max: 9 } as const;
     const $ = cheerio.load(ctx.html);
     const found = new Set<string>();
 
@@ -27,7 +27,7 @@ export const transparencyCheck: Check = {
       return {
         ...base,
         severity: "pass",
-        score: 15,
+        score: 9,
         detail: `Accountability links present: ${[...found].join(", ")}.`,
       };
     }
@@ -35,7 +35,7 @@ export const transparencyCheck: Check = {
       return {
         ...base,
         severity: "warn",
-        score: 8,
+        score: 5,
         detail: `Only one accountability link found: ${[...found].join(", ")}.`,
         remediation: "Add contact, privacy, and terms links so agents can establish accountability.",
       };

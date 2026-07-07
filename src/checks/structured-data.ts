@@ -9,7 +9,7 @@ export const structuredDataCheck: Check = {
   id: "structured-data",
   title: "Machine-readable structured data",
   run(ctx: SiteContext): Finding {
-    const base = { id: this.id, title: this.title, max: 15 } as const;
+    const base = { id: this.id, title: this.title, max: 12 } as const;
     const $ = cheerio.load(ctx.html);
     const jsonLd = $('script[type="application/ld+json"]').length;
 
@@ -17,7 +17,7 @@ export const structuredDataCheck: Check = {
       return {
         ...base,
         severity: "pass",
-        score: 15,
+        score: 12,
         detail: `Found ${jsonLd} JSON-LD block(s), so agents can parse page entities.`,
       };
     }

@@ -9,6 +9,10 @@ export interface SiteContext {
   robotsTxt: string | null;
   /** Contents of /llms.txt, or null if missing. */
   llmsTxt: string | null;
+  /** Contents of /sitemap.xml, or null if missing. */
+  sitemapXml?: string | null;
+  /** Additional crawled pages beyond the landing page. */
+  pages?: { url: string; html: string }[];
 }
 
 export type Severity = "pass" | "warn" | "fail";

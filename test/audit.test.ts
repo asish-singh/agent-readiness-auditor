@@ -9,12 +9,14 @@ function perfectCtx(): SiteContext {
     origin: "https://example.com",
     html: `<!doctype html><html><body>
       <script type="application/ld+json">{"@type":"Organization"}</script>
+      <script type="application/ld+json">{"@type":"FAQPage"}</script>
       <a href="/about">About</a><a href="/contact">Contact</a>
       <a href="/privacy">Privacy</a><a href="/terms">Terms</a>
       <p>Welcome to our site.</p>
     </body></html>`,
     robotsTxt: "User-agent: GPTBot\nDisallow:\nUser-agent: ClaudeBot\nAllow: /",
     llmsTxt: "# Example\n- /about",
+    sitemapXml: "<urlset><url><loc>https://example.com/about</loc></url></urlset>",
   };
 }
 
@@ -86,7 +88,7 @@ test("grade boundaries map percentages to letters correctly", () => {
     llmsTxt: null,
   };
   const report = audit(ctx);
-  // Only the 40-pt safety check passes → 40% → grade D.
-  assert.equal(report.score, 40);
+  // Only the safety check (40) and meta robots (5) pass → 45% → grade D.
+  assert.equal(report.score, 45);
   assert.equal(report.grade, "D");
 });

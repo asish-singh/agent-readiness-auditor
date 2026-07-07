@@ -8,12 +8,12 @@ export const llmsTxtCheck: Check = {
   id: "llms-txt-present",
   title: "llms.txt present",
   run(ctx: SiteContext): Finding {
-    const base = { id: this.id, title: this.title, max: 15 } as const;
+    const base = { id: this.id, title: this.title, max: 12 } as const;
     if (ctx.llmsTxt && ctx.llmsTxt.trim().length > 0) {
       return {
         ...base,
         severity: "pass",
-        score: 15,
+        score: 12,
         detail: "Found /llms.txt, so agents get a curated map of the site.",
       };
     }

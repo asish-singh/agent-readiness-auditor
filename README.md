@@ -20,15 +20,19 @@ Standard SEO tools measure how well a site works for search engines. This tool m
 
 ## What it checks
 
-The tool fetches a URL and runs five checks, producing a score from 0 to 100 and a letter grade from A to F. Safety is weighted highest on purpose, because a readable site that can hijack an agent is worse than one that is simply hard to read.
+The tool fetches the landing page, robots.txt, llms.txt, and the sitemap, then crawls a few key pages and runs nine checks, producing a score from 0 to 100 and a letter grade from A to F. Safety is weighted highest on purpose, because a readable site that can hijack an agent is worse than one that is simply hard to read.
 
 | Check | Points | What it looks for |
 |---|---|---|
-| Hidden prompt-injection text | 40 | Text hidden from humans (for example `display:none` or `opacity:0`) that contains agent-hijacking phrases such as "ignore previous instructions". |
-| `llms.txt` file | 15 | A published file that gives agents a curated map of the site. See [llmstxt.org](https://llmstxt.org). |
-| `robots.txt` stance on AI crawlers | 15 | Explicit allow or disallow rules for AI crawlers such as GPTBot and ClaudeBot. |
-| Structured data (JSON-LD) | 15 | Machine-readable data that lets agents understand page content directly. |
-| Accountability links | 15 | Reachable contact, privacy, terms, or about links. |
+| Hidden prompt-injection text | 40 | Agent-hijacking phrases in content humans cannot see, across every crawled page. Detects CSS hiding (`display:none`, `opacity:0`, off-screen positioning), zero-width unicode obfuscation, `alt`/`title`/`aria-label` attribute payloads, and HTML comments. |
+| `llms.txt` file | 12 | A published file that gives agents a curated map of the site. See [llmstxt.org](https://llmstxt.org). |
+| `robots.txt` stance on AI crawlers | 12 | Explicit allow or disallow rules for AI crawlers such as GPTBot and ClaudeBot. |
+| Structured data (JSON-LD) | 12 | Machine-readable data that lets agents understand page content directly. |
+| Accountability links | 9 | Reachable contact, privacy, terms, or about links. |
+| Sitemap | 5 | A reachable /sitemap.xml so crawlers can discover the whole site. |
+| Answerability | 5 | FAQ, QA, or HowTo structured data, the content shapes AI answers quote most readily. |
+| Meta robots | 5 | No accidental `noindex`/`noai` directives hiding the site from indexes. |
+| MCP signal | 0 | Informational only: whether the site advertises an MCP or agent-facing endpoint. Unscored while conventions are young. |
 
 ## Example output
 

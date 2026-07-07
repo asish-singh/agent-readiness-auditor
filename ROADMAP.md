@@ -12,8 +12,8 @@ Work is planned in milestones. Each milestone can ship on its own.
 - [x] Published to npm
 
 ## v0.2: More depth
-- [ ] Crawl a few internal pages, not just the landing page
-- [ ] Expand prompt-injection detection (unicode tricks, off-screen positioning, `alt` and `title` attributes)
+- [x] Crawl a few internal pages, not just the landing page (shipped in v0.4.0)
+- [x] Expand prompt-injection detection (unicode tricks, off-screen positioning, `alt` and `title` attributes) (shipped in v0.4.0)
 - [ ] A config file to adjust weights and thresholds
 
 ## v0.3: Wider distribution
@@ -29,7 +29,7 @@ Work is planned in milestones. Each milestone can ship on its own.
 MCP is the emerging standard that lets AI assistants connect to external tools. Two separate opportunities, tracked as issues:
 
 - [x] Expose the auditor as an MCP server, so an AI assistant can run an audit on request (shipped early, in v0.2.0)
-- [ ] Add a scoring signal for whether a site advertises its own MCP or agent-facing endpoints
+- [x] Add a scoring signal for whether a site advertises its own MCP or agent-facing endpoints (shipped in v0.4.0 as an unscored informational check)
 
 ## Out of scope for now
 - Rendering pages that rely heavily on client-side JavaScript (the current version reads raw HTML only)
