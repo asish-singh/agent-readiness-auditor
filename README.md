@@ -100,7 +100,7 @@ The tool sets its exit code so it can be used in automated pipelines:
 
 ## How the code is organized
 
-Each check lives in its own file under `src/checks/` and returns a structured result. All checks are registered in a single list in `src/audit.ts`, and the total score is derived from that list, so adding a new check does not require changing the scoring logic. Architecture decisions are recorded in [`docs/adr/`](docs/adr/), and planned work is in [`ROADMAP.md`](ROADMAP.md).
+Each check lives in its own file under `src/checks/` and returns a structured result. All checks are registered in a single list in `src/audit.ts`, and the total score is derived from that list, so adding a new check does not require changing the scoring logic. Architecture decisions are recorded in [`docs/adr/`](docs/adr/), product decisions in [`docs/decisions/`](docs/decisions/), planned work in [`ROADMAP.md`](ROADMAP.md), and the go-to-market plan in [`LAUNCH.md`](LAUNCH.md).
 
 ## Background
 

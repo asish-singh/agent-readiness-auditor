@@ -24,6 +24,13 @@ Work is planned in milestones. Each milestone can ship on its own.
 - [ ] A single-page web front end
 - [ ] Shareable report links
 
+## v0.5: Model Context Protocol (MCP)
+
+MCP is the emerging standard that lets AI assistants connect to external tools. Two separate opportunities, tracked as issues:
+
+- [ ] Expose the auditor as an MCP server, so an AI assistant can run an audit on request ("audit example.com for me")
+- [ ] Add a scoring signal for whether a site advertises its own MCP or agent-facing endpoints
+
 ## Out of scope for now
 - Rendering pages that rely heavily on client-side JavaScript (the current version reads raw HTML only)
 - Pages behind a login
