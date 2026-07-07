@@ -3,6 +3,13 @@
 All notable changes to this project are documented here.
 The format follows [Keep a Changelog](https://keepachangelog.com), and this project uses [semantic versioning](https://semver.org).
 
+## [0.4.2] - 2026-07-07
+### Fixed
+- The MCP server now reports the real package version instead of a hardcoded one.
+
+### Added
+- A decision record on the study's near miss false positive, docs/decisions/the-false-positive.md.
+
 ## [0.4.1] - 2026-07-07
 ### Fixed
 - Detection precision. Weak phrases that occur in ordinary writing about AI ("as an AI", "system prompt") now only count inside deliberately hidden elements. Attribute and comment scanning requires unambiguous directive phrases, so news captions and documentation are no longer flagged as attacks.

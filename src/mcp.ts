@@ -4,9 +4,12 @@
  * the Model Context Protocol (stdio transport), so an assistant can run
  * an audit when a user asks for one in plain language.
  */
+import { createRequire } from "node:module";
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import { z } from "zod";
+
+const { version } = createRequire(import.meta.url)("../package.json");
 import { fetchSite } from "./fetch-site.js";
 import { audit } from "./audit.js";
 import type { AuditReport } from "./types.js";
@@ -27,7 +30,7 @@ function summarize(report: AuditReport): string {
 
 const server = new McpServer({
   name: "agent-readiness-auditor",
-  version: "0.2.0",
+  version,
 });
 
 server.registerTool(
