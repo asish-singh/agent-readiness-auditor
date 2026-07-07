@@ -17,7 +17,7 @@ Work is planned in milestones. Each milestone can ship on its own.
 - [ ] A config file to adjust weights and thresholds
 
 ## v0.3: Wider distribution
-- [ ] A GitHub Action wrapper so other repos can run the audit in their own pipelines
+- [x] A GitHub Action wrapper so other repos can run the audit in their own pipelines (shipped in v0.3.0)
 - [x] Batch mode, audit a list of URLs and output CSV (shipped early, in v0.2.0)
 
 ## v0.4: Web interface

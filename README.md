@@ -71,6 +71,23 @@ agent-audit --batch sites.txt --json   # structured results
 
 The CSV has a column for each check, which makes it easy to open in a spreadsheet or feed into an analysis.
 
+## Using it in GitHub Actions
+
+The repo doubles as a GitHub Action, so any project can audit its own site on every push or on a schedule and fail the build if a hard safety problem appears.
+
+```yaml
+steps:
+  - uses: actions/setup-node@v4
+    with:
+      node-version: 20
+  - uses: asish-singh/agent-readiness-auditor@v0.3.0
+    with:
+      url: example.com
+      fail-on: safety   # or "never" to report without failing
+```
+
+An unreachable site produces a warning, not a failure, since bot protection on CI runners is an infrastructure issue rather than a safety one. This repo uses the action on itself every Monday in [audit-site.yml](.github/workflows/audit-site.yml).
+
 ## Using it from an AI assistant (MCP)
 
 The auditor ships with a server for the Model Context Protocol, the standard that lets AI assistants use external tools. Once connected, you can simply ask your assistant to audit a site for you.

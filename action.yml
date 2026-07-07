@@ -1,0 +1,43 @@
+name: "Agent Readiness Audit"
+description: "Audit a website for AI agent readiness and safety. Fails the build when hidden prompt injection content is found."
+author: "Asish Singh"
+branding:
+  icon: "shield"
+  color: "blue"
+
+inputs:
+  url:
+    description: "The site to audit, as a bare domain (example.com) or full URL"
+    required: true
+  fail-on:
+    description: "When to fail the build. 'safety' fails only on a hard safety failure such as hidden prompt injection content. 'never' always passes and just reports."
+    required: false
+    default: "safety"
+  version:
+    description: "Version of agent-readiness-auditor to run"
+    required: false
+    default: "latest"
+
+runs:
+  using: "composite"
+  steps:
+    - name: Run agent readiness audit
+      shell: bash
+      run: |
+        set +e
+        npx -y "agent-readiness-auditor@${{ inputs.version }}" "${{ inputs.url }}"
+        code=$?
+        set -e
+        if [ "$code" -eq 1 ]; then
+          echo "::warning::The audit could not be completed (the site was unreachable or blocked the request)."
+          exit 0
+        fi
+        if [ "$code" -eq 2 ]; then
+          if [ "${{ inputs.fail-on }}" = "never" ]; then
+            echo "::warning::Hard safety failure found, but fail-on is set to never."
+            exit 0
+          fi
+          echo "::error::Hard safety failure. The site contains content that could hijack an AI agent."
+          exit 2
+        fi
+        exit 0

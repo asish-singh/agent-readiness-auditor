@@ -3,6 +3,13 @@
 All notable changes to this project are documented here.
 The format follows [Keep a Changelog](https://keepachangelog.com), and this project uses [semantic versioning](https://semver.org).
 
+## [0.3.0] - 2026-07-07
+### Added
+- A composite GitHub Action, so any repository can audit a site in its own pipeline with `uses: asish-singh/agent-readiness-auditor@v0.3.0`. It fails the build on a hard safety failure, warns on unreachable sites, and has a `fail-on: never` reporting mode.
+
+### Changed
+- The scheduled live site audit workflow now uses the Action itself.
+
 ## [0.2.0] - 2026-07-07
 ### Added
 - An MCP server (`agent-audit-mcp`), so AI assistants can run audits through the Model Context Protocol. It exposes one tool, `audit_site`.
