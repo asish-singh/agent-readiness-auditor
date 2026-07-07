@@ -1,0 +1,100 @@
+# Site list for the 2026 State of the Agentic Web study.
+# Curated across seven categories. One URL per line.
+
+# AI companies
+openai.com
+anthropic.com
+mistral.ai
+cohere.com
+perplexity.ai
+huggingface.co
+stability.ai
+x.ai
+deepmind.google
+scale.com
+
+# Major SaaS
+salesforce.com
+hubspot.com
+slack.com
+zoom.us
+notion.so
+atlassian.com
+asana.com
+monday.com
+airtable.com
+dropbox.com
+box.com
+shopify.com
+stripe.com
+intercom.com
+zendesk.com
+figma.com
+canva.com
+calendly.com
+docusign.com
+twilio.com
+
+# Developer platforms
+github.com
+gitlab.com
+vercel.com
+netlify.com
+cloudflare.com
+digitalocean.com
+heroku.com
+npmjs.com
+pypi.org
+stackoverflow.com
+
+# News and media
+nytimes.com
+theguardian.com
+bbc.com
+reuters.com
+apnews.com
+bloomberg.com
+wsj.com
+washingtonpost.com
+theverge.com
+techcrunch.com
+wired.com
+arstechnica.com
+
+# Government and institutions
+usa.gov
+gov.uk
+europa.eu
+canada.ca
+whitehouse.gov
+irs.gov
+nasa.gov
+nih.gov
+who.int
+un.org
+
+# Retail and consumer
+amazon.com
+walmart.com
+target.com
+bestbuy.com
+ebay.com
+etsy.com
+ikea.com
+nike.com
+airbnb.com
+booking.com
+expedia.com
+doordash.com
+
+# Finance
+chase.com
+bankofamerica.com
+wellsfargo.com
+paypal.com
+visa.com
+mastercard.com
+coinbase.com
+robinhood.com
+wise.com
+americanexpress.com

@@ -14,6 +14,10 @@ AI assistants increasingly visit websites on a person's behalf: reading pages, f
 
 Standard SEO tools measure how well a site works for search engines. This tool measures something different: how well a site works for AI agents, and whether it is safe for them to read.
 
+## Research built with this tool
+
+[The State of the Agentic Web, 2026](reports/2026-state-of-the-agentic-web/) audits 84 prominent sites across seven categories with this tool. Among the findings, no audited site carried hidden prompt injection content, 36% publish llms.txt, and nearly one in five prominent sites refuses automated visitors entirely, including several AI companies. The data and method are published for anyone to reproduce.
+
 ## What it checks
 
 The tool fetches a URL and runs five checks, producing a score from 0 to 100 and a letter grade from A to F. Safety is weighted highest on purpose, because a readable site that can hijack an agent is worse than one that is simply hard to read.
