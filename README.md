@@ -98,7 +98,7 @@ An unreachable site produces a warning, not a failure, since bot protection on C
 
 ## Using it from an AI assistant (MCP)
 
-The auditor ships with a server for the Model Context Protocol, the standard that lets AI assistants use external tools. Once connected, you can simply ask your assistant to audit a site for you.
+The auditor ships with a server for the Model Context Protocol, the standard that lets AI assistants use external tools, and is listed on the [official MCP registry](https://registry.modelcontextprotocol.io). One of this tool's own findings is that zero of 69 prominent sites advertise an agent endpoint, so the auditor holds itself to the standard it measures. Once connected, you can simply ask your assistant to audit a site for you.
 
 For Claude Code, one command connects it.
 
