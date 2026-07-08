@@ -38,10 +38,11 @@ server.registerTool(
   {
     title: "Audit a website for AI agent readiness",
     description:
-      "Fetches a website and scores how well it works with, and defends against, AI agents. " +
-      "Checks for hidden prompt injection text, llms.txt, the robots.txt stance on AI crawlers, " +
-      "structured data, and accountability links. Returns a score out of 100, a letter grade, " +
-      "and a finding for each check with a suggested fix.",
+      "Fetches a website (crawling multiple pages) and scores how well it works with, and defends against, AI agents. " +
+      "Runs nine checks: hidden prompt injection text, llms.txt, the robots.txt stance on AI crawlers, " +
+      "structured data, accountability links, sitemap, content structured for AI answers, " +
+      "accidental index blocking, and whether an agent endpoint (such as MCP) is advertised. " +
+      "Returns a score out of 100, a letter grade, and a finding for each check with a suggested fix.",
     inputSchema: {
       url: z
         .string()
