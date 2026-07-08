@@ -49,6 +49,7 @@ $ npx agent-readiness-auditor example.com
   ⚠️  Sitemap present                      (0/5)
   ⚠️  Content structured for AI answers    (0/5)
   ✅ No accidental index blocking          (5/5)
+  ✅ Agent endpoint advertised (informational)  (0/0)
 
   Score: 45/100 (45%)   Grade D
 ```
