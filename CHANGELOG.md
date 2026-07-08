@@ -3,6 +3,10 @@
 All notable changes to this project are documented here.
 The format follows [Keep a Changelog](https://keepachangelog.com), and this project uses [semantic versioning](https://semver.org).
 
+## [0.4.3] - 2026-07-08
+### Changed
+- The MCP tool description now names all nine checks and the multi page crawl, so assistants know the full scope of the audit before running it.
+
 ## [0.4.2] - 2026-07-07
 ### Fixed
 - The MCP server now reports the real package version instead of a hardcoded one.
