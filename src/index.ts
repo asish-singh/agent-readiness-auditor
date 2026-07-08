@@ -21,6 +21,7 @@ function render(report: AuditReport): void {
 function usage(): never {
   console.error("Usage: agent-audit <url> [--json]");
   console.error("       agent-audit --batch <file> [--json | --csv]");
+  console.error("       agent-audit mcp   (start the MCP server for AI assistants)");
   process.exit(1);
 }
 
@@ -51,6 +52,14 @@ async function runBatch(file: string, jsonMode: boolean, csvMode: boolean): Prom
 
 async function main(): Promise<void> {
   const args = process.argv.slice(2);
+
+  // `agent-readiness-auditor mcp` starts the MCP server, so one memorable
+  // command name covers both the CLI and the assistant integration.
+  if (args[0] === "mcp") {
+    await import("./mcp.js");
+    return;
+  }
+
   const jsonMode = args.includes("--json");
   const csvMode = args.includes("--csv");
   const batchIdx = args.indexOf("--batch");

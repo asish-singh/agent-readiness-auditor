@@ -103,7 +103,7 @@ The auditor ships with a server for the Model Context Protocol, the standard tha
 For Claude Code, one command connects it.
 
 ```bash
-claude mcp add agent-readiness-auditor -- npx -y --package=agent-readiness-auditor agent-audit-mcp
+claude mcp add agent-readiness-auditor -- npx -y agent-readiness-auditor mcp
 ```
 
 For Claude Desktop, add this to the `mcpServers` section of the configuration file.
@@ -112,7 +112,7 @@ For Claude Desktop, add this to the `mcpServers` section of the configuration fi
 {
   "agent-readiness-auditor": {
     "command": "npx",
-    "args": ["-y", "--package=agent-readiness-auditor", "agent-audit-mcp"]
+    "args": ["-y", "agent-readiness-auditor", "mcp"]
   }
 }
 ```

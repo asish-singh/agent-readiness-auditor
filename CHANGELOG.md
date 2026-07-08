@@ -3,6 +3,10 @@
 All notable changes to this project are documented here.
 The format follows [Keep a Changelog](https://keepachangelog.com), and this project uses [semantic versioning](https://semver.org).
 
+## [0.4.5] - 2026-07-08
+### Added
+- `agent-readiness-auditor mcp` starts the MCP server, so one memorable command name covers both the CLI and the assistant integration. The setup line is now `claude mcp add agent-readiness-auditor -- npx -y agent-readiness-auditor mcp`. The old `agent-audit-mcp` command still works.
+
 ## [0.4.4] - 2026-07-08
 ### Fixed
 - `npx agent-readiness-auditor` now works as documented. The package ships commands named agent-audit and agent-audit-mcp, and npx could not choose between them when invoked by package name, so a command named after the package itself now runs the audit.
