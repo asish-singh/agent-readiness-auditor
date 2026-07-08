@@ -6,12 +6,12 @@
     "url": "https://github.com/asish-singh/agent-readiness-auditor",
     "source": "github"
   },
-  "version": "0.4.3",
+  "version": "0.4.4",
   "packages": [
     {
       "registryType": "npm",
       "identifier": "agent-readiness-auditor",
-      "version": "0.4.3",
+      "version": "0.4.4",
       "transport": {
         "type": "stdio"
       },

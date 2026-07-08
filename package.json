@@ -1,11 +1,12 @@
 {
   "name": "agent-readiness-auditor",
-  "version": "0.4.3",
+  "version": "0.4.4",
   "description": "Scan a website and score how well it works with, and defends against, AI agents.",
   "type": "module",
   "bin": {
     "agent-audit": "dist/index.js",
-    "agent-audit-mcp": "dist/mcp.js"
+    "agent-audit-mcp": "dist/mcp.js",
+    "agent-readiness-auditor": "dist/index.js"
   },
   "files": [
     "dist"

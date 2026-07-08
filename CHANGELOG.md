@@ -3,6 +3,10 @@
 All notable changes to this project are documented here.
 The format follows [Keep a Changelog](https://keepachangelog.com), and this project uses [semantic versioning](https://semver.org).
 
+## [0.4.4] - 2026-07-08
+### Fixed
+- `npx agent-readiness-auditor` now works as documented. The package ships commands named agent-audit and agent-audit-mcp, and npx could not choose between them when invoked by package name, so a command named after the package itself now runs the audit.
+
 ## [0.4.3] - 2026-07-08
 ### Changed
 - The MCP tool description now names all nine checks and the multi page crawl, so assistants know the full scope of the audit before running it.
