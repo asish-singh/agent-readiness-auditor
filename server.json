@@ -1,7 +1,9 @@
 {
-  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-07-09/server.schema.json",
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "io.github.asish-singh/agent-readiness-auditor",
+  "title": "Agent Readiness Auditor",
   "description": "Audits any website for AI agent readiness and safety, scoring prompt injection risk and llms.txt.",
+  "websiteUrl": "https://scan.asishsingh.in",
   "repository": {
     "url": "https://github.com/asish-singh/agent-readiness-auditor",
     "source": "github"
