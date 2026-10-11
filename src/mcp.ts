@@ -41,7 +41,7 @@ server.registerTool(
       "Fetches a website (crawling multiple pages) and scores how well it works with, and defends against, AI agents. " +
       "Runs nine checks: hidden prompt injection text, llms.txt, the robots.txt stance on AI crawlers, " +
       "structured data, accountability links, sitemap, content structured for AI answers, " +
-      "accidental index blocking, and whether an agent endpoint (such as MCP) is advertised. " +
+      "accidental index blocking, and whether an agent endpoint is advertised, including a /.well-known/ai-catalog.json listing MCP server cards. " +
       "Returns a score out of 100, a letter grade, and a finding for each check with a suggested fix.",
     inputSchema: {
       url: z

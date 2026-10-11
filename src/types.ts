@@ -9,6 +9,8 @@ export interface SiteContext {
   robotsTxt: string | null;
   /** Contents of /llms.txt, or null if missing. */
   llmsTxt: string | null;
+  /** Contents of /.well-known/ai-catalog.json, or null if missing. */
+  aiCatalog?: string | null;
   /** Contents of /sitemap.xml, or null if missing. */
   sitemapXml?: string | null;
   /** Additional crawled pages beyond the landing page. */

@@ -3,6 +3,11 @@
 All notable changes to this project are documented here.
 The format follows [Keep a Changelog](https://keepachangelog.com), and this project uses [semantic versioning](https://semver.org).
 
+## [0.5.0] - 2026-10-11
+### Added
+- The MCP signal check now reads `/.well-known/ai-catalog.json`, the discovery document that MCP Server Cards (SEP-2127, merged 6 October 2026) adopted. It validates the catalog against the required rules of the AI Catalog spec and reports how many MCP server cards and A2A agent cards it lists. A malformed catalog is reported as a warning with a remediation, and the check still awards no points.
+- Sites that answer every address with an ordinary web page are not mistaken for publishing a catalog, because a catalog must parse as a JSON object.
+
 ## [0.4.6] - 2026-07-08
 ### Changed
 - Documentation only. The README example output now shows all nine checks, and the MCP section notes the official registry listing. No code changes.

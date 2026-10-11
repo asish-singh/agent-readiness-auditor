@@ -20,7 +20,7 @@ Standard SEO tools measure how well a site works for search engines. This tool m
 
 ## What it checks
 
-The tool fetches the landing page, robots.txt, llms.txt, and the sitemap, then crawls a few key pages and runs nine checks, producing a score from 0 to 100 and a letter grade from A to F. Safety is weighted highest on purpose, because a readable site that can hijack an agent is worse than one that is simply hard to read.
+The tool fetches the landing page, robots.txt, llms.txt, the sitemap, and the AI Catalog, then crawls a few key pages and runs nine checks, producing a score from 0 to 100 and a letter grade from A to F. Safety is weighted highest on purpose, because a readable site that can hijack an agent is worse than one that is simply hard to read.
 
 | Check | Points | What it looks for |
 |---|---|---|
@@ -32,7 +32,7 @@ The tool fetches the landing page, robots.txt, llms.txt, and the sitemap, then c
 | Sitemap | 5 | A reachable /sitemap.xml so crawlers can discover the whole site. |
 | Answerability | 5 | FAQ, QA, or HowTo structured data, the content shapes AI answers quote most readily. |
 | Meta robots | 5 | No accidental `noindex`/`noai` directives hiding the site from indexes. |
-| MCP signal | 0 | Informational only: whether the site advertises an MCP or agent-facing endpoint. Unscored while conventions are young. |
+| MCP signal | 0 | Informational only: whether the site publishes an AI Catalog at `/.well-known/ai-catalog.json` (the discovery document adopted by MCP Server Cards, SEP-2127) and which MCP server cards and A2A agent cards it lists, falling back to mentions in llms.txt or robots.txt. A malformed catalog is flagged with a fix, still unscored. |
 
 ## Example output
 

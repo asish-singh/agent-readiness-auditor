@@ -1,4 +1,5 @@
 import type { SiteContext } from "./types.js";
+import { AI_CATALOG_PATH } from "./ai-catalog.js";
 
 // A browser-compatible UA. Many sites (esp. behind Cloudflare) challenge or
 // block unknown bot user-agents, which would make the audit fail to fetch even
@@ -61,16 +62,17 @@ function pickPageUrls(origin: string, sitemapXml: string | null, html: string, l
 }
 
 /**
- * Fetches the landing page, robots.txt, llms.txt, sitemap.xml, and a few
+ * Fetches the landing page, robots.txt, llms.txt, sitemap.xml, the AI Catalog, and a few
  * additional pages (from the sitemap when available, else landing-page links).
  */
 export async function fetchSite(input: string): Promise<SiteContext> {
   const origin = normalizeOrigin(input);
-  const [page, robots, llms, sitemap] = await Promise.all([
+  const [page, robots, llms, sitemap, aiCatalog] = await Promise.all([
     getText(origin),
     getText(`${origin}/robots.txt`),
     getText(`${origin}/llms.txt`),
     getText(`${origin}/sitemap.xml`),
+    getText(`${origin}${AI_CATALOG_PATH}`),
   ]);
   if (page.text === null) {
     const reason =
@@ -93,6 +95,7 @@ export async function fetchSite(input: string): Promise<SiteContext> {
     robotsTxt: robots.text,
     llmsTxt: llms.text,
     sitemapXml: sitemap.text,
+    aiCatalog: aiCatalog.text,
     pages,
   };
 }
